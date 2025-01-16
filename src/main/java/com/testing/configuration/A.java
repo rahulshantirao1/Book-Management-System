@@ -3,6 +3,7 @@ package com.testing.configuration;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class A {
 
@@ -32,5 +33,14 @@ public class A {
         int min = no.stream().mapToInt(Integer::intValue).min().orElse(Integer.MAX_VALUE);
         System.out.println("This is the difference between "+(max-min));
 
+        /*Write a program to remove all whitespace from a list of strings using Java Stream API.*/
+        List<String> stringList = Arrays.asList("Rahul ", "name ", "email  ", "  mobile");
+        List<String> collect1 = stringList.stream().map(e -> Arrays.stream(e.trim().split(" ")).map(ea -> new StringBuilder(ea)).collect(Collectors.joining()))
+                .collect(Collectors.toList());
+        for (String s:collect1)
+        {
+            System.out.println(s.length());
+        }
+        System.out.println(collect1);
     }
 }
