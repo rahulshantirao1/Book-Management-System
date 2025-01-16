@@ -1,7 +1,9 @@
 package com.testing.configuration;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -42,5 +44,26 @@ public class A {
             System.out.println(s.length());
         }
         System.out.println(collect1);
+
+        /* Given a list of strings, write a program to find and
+        print the strings containing a specific substring using Java Stream API.*/
+        String sub="Ra";
+
+        List<String> containsSubstring = stringList.stream().filter(e -> e.contains(sub)).collect(Collectors.toList());
+        System.out.println(containsSubstring);
+
+        /*Write a program to find the mode of a list of integers using Java Stream API.*/
+        List<Integer> list1 = Arrays.asList(3, 4, 5, 2, 4, 4,5, 8, 9,9, 9);
+
+        LinkedHashMap<Integer, Long> list2 = list1.stream().map(e -> e).collect(Collectors.groupingBy(ea -> ea, LinkedHashMap::new, Collectors.counting()));
+        long frequency = list2.values().stream().mapToLong(Long::longValue).max().orElse(0);
+        List<Boolean> collect2 = list2.entrySet().stream().map(e -> e.getValue() == frequency).map(ea->ea).collect(Collectors.toList());
+        System.out.println(collect2+" Hello");
+
+
+        Map.Entry<Integer, Long> integerLongEntry = list1.stream().map(e -> e).collect(Collectors.groupingBy(ea -> ea, LinkedHashMap::new, Collectors.counting()))
+                .entrySet().stream().max((t, s) -> t.getValue().intValue() - s.getValue().intValue()).orElse(null);
+        System.out.println("this is the value:"+ integerLongEntry);
+
     }
 }
